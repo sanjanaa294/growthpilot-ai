@@ -454,19 +454,13 @@ elif feature == "Prompt Testing Lab":
             basic_prompt = task.strip()
             improved_prompt = (
                 f"Task: {task.strip()}\n\n"
-                "Requirements:\n"
-                "- Identify the intended audience using only information in the task.\n"
-                "- Follow the requested format, platform, and goal.\n"
-                "- Use clear, specific, actionable language.\n"
-                "- Never invent company achievements, customer results, "
-                "statistics, testimonials, offers, guarantees, or service capabilities.\n"
-                "- Do not present assumptions about the audience as confirmed facts.\n"
-                "- Use placeholders only for details essential to the task "
-                "that have not been provided.\n"
-                "- Avoid unnecessary placeholders and repetitive content.\n"
-                "- Make the output practical and easy to edit before use.\n"
-                "- Briefly identify important information that should be "
-                "verified before publishing."
+                "Instructions for an improved response:\n"
+                "1. Objective & Scope Preservation: Fulfill all components and intended deliverables of the original task without altering, narrowing, or replacing the objective. If the task asks for multiple deliverables (such as market research, lead qualification, and marketing content), address each one in full.\n"
+                "2. Structure & Output Formatting: Organize the output with clear, dedicated headings for each part of the task so the response is structured, readable, and directly comparable to the basic response.\n"
+                "3. Specificity & Context: Provide clear, practical, and actionable steps rather than generic generalizations.\n"
+                "4. Factual Grounding & Constraints: Rely strictly on information provided in the task and sound general reasoning. Never invent company metrics, audience demographics, customer results, statistics, guarantees, or testimonials.\n"
+                "5. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions, hypotheses, or suggestions that require real-world validation.\n"
+                "6. Placeholders: Use bracketed placeholders (such as [Business Name] or [Target Audience]) only for essential details not supplied in the task."
             )
 
             col1, col2 = st.columns(2)
@@ -486,9 +480,10 @@ elif feature == "Prompt Testing Lab":
                 with st.spinner("Testing improved prompt..."):
                     improved_result = run_ai(
                         system_prompt=(
-                            "You are a careful assistant. Follow the supplied "
-                            "requirements, avoid unsupported claims, and be clear "
-                            "about uncertainty."
+                            "You are a rigorous, careful AI assistant. Thoroughly fulfill all "
+                            "objectives of the user's task while preserving its exact scope. "
+                            "Provide clear structure, actionable detail, and strong factual discipline "
+                            "without inventing unprovided data or making unsupported claims."
                         ),
                         user_prompt=improved_prompt,
                     )
@@ -498,10 +493,10 @@ elif feature == "Prompt Testing Lab":
             st.divider()
             st.subheader("What changed in the prompt?")
             st.markdown(
-                "- **Audience and format:** asks for a response suited to the task.\n"
-                "- **Factual constraints:** explicitly prohibits invented claims.\n"
-                "- **Missing information:** asks for placeholders instead of guesses.\n"
-                "- **Clarity:** requests specific, actionable language and less repetition."
+                "- **Scope preservation:** explicitly instructs the AI to fulfill all requested task deliverables without narrowing or altering the objective.\n"
+                "- **Structure & formatting:** organizes output into dedicated, readable sections for each part of the task.\n"
+                "- **Factual constraints:** strictly prohibits invented metrics, testimonials, or guarantees, and flags hypotheses for validation.\n"
+                "- **Actionability & placeholders:** replaces vague generalities with specific steps and uses clear bracketed placeholders for missing details."
             )
             st.caption(
                 "Compare both outputs for factual reliability, relevance, clarity, "

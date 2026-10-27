@@ -278,33 +278,48 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
 #### Version 2: Improved Prompt
 * **System Prompt:**
   ```text
-  You are a careful assistant. Follow the supplied requirements, avoid
-  unsupported claims, and be clear about uncertainty.
+  You are a rigorous, careful AI assistant. Thoroughly fulfill all
+  objectives of the user's task while preserving its exact scope.
+  Provide clear structure, actionable detail, and strong factual discipline
+  without inventing unprovided data or making unsupported claims.
   ```
 * **User Prompt:**
   ```text
   Task: {task.strip()}
 
-  Requirements:
-  - Identify the intended audience using only information in the task.
-  - Follow the requested format, platform, and goal.
-  - Use clear, specific, actionable language.
-  - Never invent company achievements, customer results, statistics, testimonials, offers, guarantees, or service capabilities.
-  - Do not present assumptions about the audience as confirmed facts.
-  - Use placeholders only for details essential to the task that have not been provided.
-  - Avoid unnecessary placeholders and repetitive content.
-  - Make the output practical and easy to edit before use.
-  - Briefly identify important information that should be verified before publishing.
+  Instructions for an improved response:
+  1. Objective & Scope Preservation: Fulfill all components and intended deliverables
+     of the original task without altering, narrowing, or replacing the objective.
+     If the task asks for multiple deliverables (such as market research, lead
+     qualification, and marketing content), address each one in full.
+  2. Structure & Output Formatting: Organize the output with clear, dedicated headings
+     for each part of the task so the response is structured, readable, and directly
+     comparable to the basic response.
+  3. Specificity & Context: Provide clear, practical, and actionable steps rather
+     than generic generalizations.
+  4. Factual Grounding & Constraints: Rely strictly on information provided in the
+     task and sound general reasoning. Never invent company metrics, audience
+     demographics, customer results, statistics, guarantees, or testimonials.
+  5. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions,
+     hypotheses, or suggestions that require real-world validation.
+  6. Placeholders: Use bracketed placeholders (such as [Business Name] or [Target Audience])
+     only for essential details not supplied in the task.
   ```
+
+#### Rationale for Revision & Observed Differences
+* **Objective & Scope Preservation:** Explicitly preventing the prompt optimizer from narrowing or mutating the task ensures that multi-deliverable prompts (such as market research, lead qualification, and content creation) are answered in full rather than devolving into a single marketing outline or post.
+* **Direct Comparability:** Both versions address the exact same questions and goals, enabling a true side-by-side comparison of prompt quality, structural discipline, and factual rigor.
+* **Factual Integrity & Demographics:** Strictly restrains the model from inventing unprovided company facts, customer demographics, or performance guarantees.
+* **Hypothesis Disclaimers:** Requires the model to separate confirmed facts from hypotheses needing validation before spending business resources.
 
 #### Side-by-Side Comparison Criteria
 | Evaluation Dimension | Version 1 (Basic Prompt) | Version 2 (Improved Prompt) |
 |---|---|---|
-| **Factual Reliability** | High risk of hallucinated stats & fake guarantees | Strictly bounded to input data |
-| **Actionability** | Often vague and broad | Specific, structured, ready to execute |
-| **Audience Alignment** | Assumes generic audience | Directly tailored to supplied constraints |
-| **Verification Guidance** | No disclaimers or validation cues | Identifies assumptions requiring verification |
-| **Format Consistency** | Freeform output | Structured sections with clean formatting |
+| **Objective Alignment** | Answers request broadly, may lack depth | Preserves exact task scope while delivering structured, complete answers for every component |
+| **Factual Reliability** | High risk of hallucinated stats & fake guarantees | Strictly bounded to input data, with assumptions flagged as hypotheses |
+| **Actionability** | Often vague and broad | Specific, structured, ready to execute with clear steps |
+| **Output Formatting** | Freeform unsegmented text | Organized dedicated sections and clear headings |
+| **Comparability** | Baseline response | 1-to-1 comparable response with superior rigor |
 
 ---
 
