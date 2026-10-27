@@ -99,9 +99,9 @@ pip install -r requirements.txt
 Create or verify a `.env` file in the root directory:
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3.5-flash
 ```
-> **Note on Models:** The default model is `gemini-2.5-flash` with automatic fallback to `gemini-1.5-flash` if needed.
+> **Note on Models:** The default model is `gemini-3.5-flash` with automatic fallback to `gemini-3.1-flash-lite` if needed.
 
 ### 6. Test the API Connection
 Run the included test script to verify your Google Gemini API key and model:

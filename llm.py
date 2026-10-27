@@ -14,7 +14,7 @@ def generate_text(system_prompt: str, user_prompt: str) -> str:
     # Reload environment variables to reflect any updates in .env
     load_dotenv(override=True)
     api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-    model = os.getenv("GEMINI_MODEL") or "gemini-2.5-flash"
+    model = os.getenv("GEMINI_MODEL") or "gemini-3.5-flash"
 
     if not api_key:
         raise RuntimeError(
@@ -32,8 +32,8 @@ def generate_text(system_prompt: str, user_prompt: str) -> str:
             ),
         )
     except Exception as err:
-        # Fallback to gemini-1.5-flash if the configured model encounters availability issues
-        fallback_model = "gemini-1.5-flash"
+        # Fallback to verified active model gemini-3.1-flash-lite if the primary model encounters temporary unavailability
+        fallback_model = "gemini-3.1-flash-lite"
         if model != fallback_model:
             response = client.models.generate_content(
                 model=fallback_model,

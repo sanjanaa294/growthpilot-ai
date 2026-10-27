@@ -359,6 +359,6 @@ During setup and verification, connection tests and diagnostic scripts were used
 * **Outcome:** Validates Google GenAI SDK authentication, model response latency, and exception handling without token waste.
 
 ### Model Availability & Fallback Architecture
-* The application loads `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) and `GEMINI_MODEL` (defaulting to `gemini-2.5-flash`) dynamically from `.env`.
-* If a transient model error occurs, the client automatically attempts a graceful fallback to `gemini-1.5-flash`.
+* The application loads `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) and `GEMINI_MODEL` (defaulting to `gemini-3.5-flash`) dynamically from `.env`.
+* If a transient model error occurs, the client automatically attempts a graceful fallback to `gemini-3.1-flash-lite`.
 * User-friendly error messages surface in the Streamlit UI with technical captions while protecting secret API keys from display.
