@@ -1,0 +1,138 @@
+# 🚀 GrowthPilot AI — AI-Powered Business Growth Assistant
+
+GrowthPilot AI is a practical, technology-focused AI growth and automation web application designed to help small businesses, freelancers, and growth consultants research markets, qualify inbound leads, craft personalized outreach, generate multi-platform marketing content, and test prompt engineering strategies.
+
+Built for the **AI Growth & Automation Associate** practical assessment at **Gokul Infocare**.
+
+---
+
+## 🌟 Core Features
+
+The application provides five focused business growth tools accessible via an intuitive sidebar:
+
+1. **🔎 Business Research**
+   * Synthesizes user-provided business and audience context into structured market hypotheses, customer segmentation, marketing opportunities, and prioritized growth recommendations.
+   * Explicitly avoids hallucinated web research claims and marks speculative items as hypotheses requiring validation before capital is committed.
+
+2. **🎯 Lead Qualification**
+   * Evaluates prospect alignment against an Ideal Customer Profile (ICP) using a transparent 100-point scoring rubric:
+     - Business/customer type match (30 pts)
+     - Stated need vs. solution match (30 pts)
+     - Budget fit (15 pts)
+     - Location or service-area fit (10 pts)
+     - Buying readiness or urgency (15 pts)
+   * Renders the evaluation in a structured Markdown scoring table with awarded points and evidence. Unknown criteria are scored conservatively rather than assumed, accompanied by high-leverage sales discovery questions.
+
+3. **✉️ Personalized Outreach Email Generator**
+   * Produces concise, professional, ready-to-edit B2B outreach emails.
+   * Enforces ethical copywriting principles: no fabricated testimonials, no fake mutual connections, clear bracketed placeholders, and low-pressure calls to action.
+
+4. **📣 Marketing Content Generator**
+   * Generates platform-tailored marketing copy for LinkedIn, Instagram, Facebook, or Email Campaigns based on specified campaign goals and tone.
+   * Provides opening hooks, grounded calls to action, relevant hashtags, and alternative hooks for A/B testing.
+
+5. **🧪 Prompt Testing & Optimization Lab**
+   * A side-by-side comparative laboratory that runs a basic, unconstrained prompt against an engineered, constraint-enforced prompt for any user-defined business task.
+   * Illustrates how prompt engineering eliminates hallucinations, improves actionability, and ensures factual reliability.
+
+---
+
+## 🛠️ Technology Stack
+
+* **Language:** Python 3.10+
+* **Web Framework:** [Streamlit](https://streamlit.io/)
+* **AI Provider / LLM SDK:** [OpenRouter SDK](https://openrouter.ai/)
+* **Environment Configuration:** `python-dotenv`
+* **Data & Presentation:** Markdown (GFM tables), Pandas
+
+---
+
+## 📂 Project Structure
+
+```text
+growthpilot-ai/
+├── app.py                      # Main Streamlit web application
+├── llm.py                      # OpenRouter LLM interface & API caller
+├── test_openrouter.py          # Quick connection test for OpenRouter API
+├── requirements.txt            # Python dependencies
+├── .env                        # Local environment variables (API key & model; gitignored)
+├── .gitignore                  # Git exclusions for secrets, venv, and cache
+├── AI_PROMPT_DOCUMENTATION.md  # Detailed prompt engineering documentation
+├── DEMO_SCRIPT.md              # 3-4 minute video demonstration presentation script
+└── README.md                   # Project overview and evaluation instructions
+```
+
+---
+
+## 🚀 Setup & Execution Instructions
+
+Follow these steps to run GrowthPilot AI locally:
+
+### 1. Prerequisites
+* Python 3.10, 3.11, or 3.12 installed on your machine.
+* An [OpenRouter API Key](https://openrouter.ai/keys).
+
+### 2. Clone or Extract the Project
+Open a terminal in the project directory:
+```bash
+cd growthpilot-ai
+```
+
+### 3. Create and Activate a Virtual Environment
+* **On Windows (PowerShell):**
+  ```powershell
+  python -m venv .venv
+  .venv\Scripts\Activate.ps1
+  ```
+* **On macOS / Linux:**
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate
+  ```
+
+### 4. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Configure Environment Variables
+Create or verify a `.env` file in the root directory:
+```env
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+OPENROUTER_MODEL=nvidia/nemotron-3.5-lightning:free
+```
+> **Note on Models:** You can select any model available on OpenRouter (e.g., `nvidia/nemotron-3.5-lightning:free`, `meta-llama/llama-3.3-70b-instruct`, `anthropic/claude-3.5-sonnet`, etc.). If a free model experiences upstream rate limiting (HTTP 429), switch to another active free model or your preferred provider key.
+
+### 6. Test the API Connection
+Run the included test script to verify your OpenRouter API key and model:
+```bash
+python test_openrouter.py
+```
+You should see:
+```text
+Testing GrowthPilot AI connection to OpenRouter...
+SUCCESS! OpenRouter returned a response.
+```
+
+### 7. Run the Web Application
+Launch the Streamlit app:
+```bash
+streamlit run app.py
+```
+Streamlit will automatically open the application in your browser at `http://localhost:8501`.
+
+---
+
+## 🔒 Security & Privacy
+
+* Secret API keys are loaded exclusively from `.env` via `python-dotenv`.
+* The `.gitignore` file excludes `.env`, `.venv/`, `.streamlit/secrets.toml`, and all cache directories to prevent accidental credential leakage.
+
+---
+
+## 📑 Assignment Submission Deliverables
+
+Per the assignment requirements:
+1. **Video Presentation:** See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) for the structured 3–4 minute presentation script.
+2. **Prompt Documentation:** See [AI_PROMPT_DOCUMENTATION.md](AI_PROMPT_DOCUMENTATION.md) for full documentation of system prompts, user prompts, revisions, rationale, and observed differences.
+3. **Project Link:** Code prepared for sharing via GitHub repository or Google Drive folder.

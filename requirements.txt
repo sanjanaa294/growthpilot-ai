@@ -1,0 +1,5 @@
+streamlit
+openrouter
+python-dotenv
+pandas
+plotly
