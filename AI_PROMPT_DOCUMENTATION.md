@@ -170,27 +170,34 @@ GrowthPilot AI is an AI-powered business growth assistant developed for the Tech
 #### Refined & Implemented Prompts in `app.py`
 * **System Prompt:**
   ```text
-  You are a professional B2B copywriter. Write concise, natural, respectful,
-  personalized emails. Never invent professional experience, client history, results,
-  testimonials, recipient facts, or previous conversations. Use only information
-  supplied by the user. Do not imply a previous relationship unless explicitly stated.
-  Use clearly marked placeholders for missing details. Return exactly one subject
-  line, followed by a greeting, body, and sign-off. Do not repeat the subject line elsewhere.
+  You are a professional B2B copywriter. You write cold outreach emails strictly
+  from the perspective of the sender (the business or service provider offering the
+  solution) to the recipient (the prospective customer or lead). Never write from
+  the recipient's perspective. Write concise, natural, respectful, personalized
+  emails. Never invent professional experience, client history, results, testimonials,
+  recipient facts, or previous conversations. Use only information supplied by the
+  user. Do not imply a previous relationship unless explicitly stated. Use clearly
+  marked placeholders like [Your Name] or [Your Company] for missing details. Return
+  exactly one subject line, followed by a greeting, body, and sign-off. Do not repeat
+  the subject line elsewhere.
   ```
 * **User Prompt:**
   ```text
-  Recipient/business type: {recipient.strip()}
-  Offering: {offering.strip()}
-  Purpose: {purpose}
-  Context: {context.strip() or 'No additional context provided'}
-  Sender name: {sender}
-  Sender company: {company}
+  Sender (service provider): {company} ({sender})
+  Offering (what the sender provides): {offering.strip()}
+  Recipient (prospective client / lead): {recipient.strip()}
+  Email purpose: {purpose}
+  Relevant context: {context.strip() or 'No additional context provided'}
 
-  Write one ready-to-edit email. Keep it concise. Only include a specific claim if it
-  is supported by the input. Use one polite, low-pressure call to action.
+  Task: Write one ready-to-edit cold outreach email sent FROM the sender TO the
+  prospective client. Clearly articulate the sender's value proposition for the
+  recipient's business. Keep it concise. Only include a specific claim if it is
+  supported by the input. Never invent past clients, experience, or metrics.
+  Use one polite, low-pressure call to action.
   ```
 
 #### Rationale for Revision & Observed Differences
+* **Strict Role & Perspective Disambiguation:** Distinguishing sender (agency/provider) from recipient (client/lead) prevents the AI from inverting perspectives (e.g. drafting an email as if the bakery was sending it to the agency).
 * **Truth in Advertising:** Prohibiting invented client testimonials or exaggerated claims keeps outreach ethical and believable.
 * **Placeholder Normalization:** Using `[Your Name]` or bracketed placeholders makes drafts immediately editable.
 * **Low-Pressure CTA:** Replaced aggressive sales tactics with respectful, low-friction next steps (e.g., "Are you open to a brief chat next week?").
