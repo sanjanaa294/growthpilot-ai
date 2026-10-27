@@ -457,10 +457,11 @@ elif feature == "Prompt Testing Lab":
                 "Instructions for an improved response:\n"
                 "1. Objective & Scope Preservation: Fulfill all components and intended deliverables of the original task without altering, narrowing, or replacing the objective. If the task asks for multiple deliverables (such as market research, lead qualification, and marketing content), address each one in full.\n"
                 "2. Structure & Output Formatting: Organize the output with clear, dedicated headings for each part of the task so the response is structured, readable, and directly comparable to the basic response.\n"
-                "3. Specificity & Context: Provide clear, practical, and actionable steps rather than generic generalizations.\n"
-                "4. Prohibition of Unsupported Business & Service Claims: Strictly prohibit unverified claims about the business's services, pricing, turnaround time, security, guarantees, experience, and capabilities. Never invent claims such as 'no hidden costs', 'fast turnaround', 'every site we build is responsive by default', 'secure ordering system', or guaranteed outcomes unless those details are explicitly provided in the task.\n"
-                "5. Marketing Templates, Copy & Conditional Phrasing: In all marketing templates, outreach copy, and sample posts, clearly distinguish suggested copy from verified facts. Whenever a business-specific claim, feature, pricing term, or capability has not been confirmed, use explicit placeholders (e.g., [Insert Verified Pricing / Terms], [Insert Actual Turnaround Time], [Insert Specific Feature / e.g., Online Ordering]) or conditional language (e.g., 'If your service includes...', 'Where applicable...').\n"
-                "6. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions, hypotheses, or suggestions that require real-world validation. Never present speculative assumptions, artificial statistics, or customer outcomes as established facts."
+                "3. Numerical Statistics Guardrail: Do not generate numerical market statistics, percentages, benchmarks, or adoption rates (e.g., '80% of searches', 'under 3 seconds') unless explicitly supplied in the task or backed by a named, verifiable source. Otherwise, omit the numerical figure or label it as [Statistic to be verified from reliable source].\n"
+                "4. Business Capabilities & Services Guardrail: Do not assert that an agency provides specific features, mobile-friendly design, fast turnaround, security, online ordering, or pricing terms unless the task explicitly confirms those capabilities. Use conditional language (e.g., 'If your agency offers [Feature]...', 'Depending on your service scope...') or explicit placeholders (e.g., [Insert Agency Core Services], [Insert Pricing Terms]).\n"
+                "5. Prospect Research & Audit Guardrail: In outreach templates and sample messages, never claim that the sender inspected, reviewed, or audited the prospect's website (e.g., do NOT write 'I reviewed your website on mobile and noticed...') unless the task confirms that an audit occurred. Provide a neutral opening (e.g., addressing common industry challenges) or an explicit placeholder (e.g., [Insert specific observation if you have audited the recipient's website / or use: 'Many local businesses face...']).\n"
+                "6. Marketing Templates vs. Verified Facts: Clearly separate suggested copy from verified facts. In all marketing templates, use clear bracketed placeholders or conditional wording for unverified details, and avoid ungrounded outcome claims or guarantees.\n"
+                "7. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions, hypotheses, or recommendations that require real-world validation. Never present speculative assumptions or customer outcomes as established facts."
             )
 
             col1, col2 = st.columns(2)
@@ -482,12 +483,11 @@ elif feature == "Prompt Testing Lab":
                         system_prompt=(
                             "You are a rigorous, careful AI assistant. Thoroughly fulfill all "
                             "objectives of the user's task while preserving its exact scope. "
-                            "Maintain strict factual discipline: prohibit unsupported claims regarding "
-                            "services, pricing (e.g., 'no hidden costs'), turnaround time (e.g., 'fast turnaround'), "
-                            "technical capabilities, security (e.g., 'secure ordering system'), responsive design "
-                            "(e.g., 'responsive by default'), experience, or guarantees. In any marketing templates "
-                            "or copy, clearly distinguish suggested draft copy from verified facts, and use "
-                            "explicit placeholders or conditional phrasing for any business claim not verified in the task."
+                            "Enforce strict factual discipline: "
+                            "1. Never invent numerical market statistics, percentages, or metrics unless provided in the task or attributed to a verified source; omit them or mark for verification. "
+                            "2. Never assert that an agency provides specific features, mobile optimization, turnaround time, pricing, security, or capabilities unless established in the task; use conditional phrasing or explicit placeholders. "
+                            "3. Never write outreach copy that falsely claims the sender inspected, reviewed, or tested a prospect's website unless the task confirms an audit took place; use neutral framing or audit placeholders. "
+                            "4. Clearly distinguish suggested copy and hypotheses from verified facts."
                         ),
                         user_prompt=improved_prompt,
                     )
@@ -497,10 +497,11 @@ elif feature == "Prompt Testing Lab":
             st.divider()
             st.subheader("What changed in the prompt?")
             st.markdown(
-                "- **Scope preservation:** instructs the AI to fulfill all requested task deliverables without narrowing the objective.\n"
-                "- **Structure & formatting:** organizes output into dedicated, readable sections for each part of the task.\n"
-                "- **Service & marketing claim restrictions:** prohibits unverified claims about pricing, turnaround, security, or capabilities in draft copy.\n"
-                "- **Conditional phrasing & placeholders:** mandates explicit placeholders and conditional language for unverified features, distinguishing suggested copy from verified facts."
+                "- **Scope preservation:** fulfills all requested task deliverables without narrowing the objective.\n"
+                "- **Statistics guardrail:** omits unverified numerical statistics (e.g., percentages, speed benchmarks) unless provided in the task.\n"
+                "- **Capability & service guardrail:** prohibits claiming specific agency features, mobile optimization, or turnaround times without verification; mandates conditional phrasing and placeholders.\n"
+                "- **Prospect audit guardrail:** forbids claiming the sender inspected or reviewed the prospect's website unless confirmed by the user; provides neutral alternatives and placeholders.\n"
+                "- **Structure & validation:** organizes output into dedicated sections and flags hypotheses requiring real-world validation."
             )
             st.caption(
                 "Compare both outputs for factual reliability, relevance, clarity, "

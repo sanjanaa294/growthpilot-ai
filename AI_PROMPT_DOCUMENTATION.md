@@ -280,12 +280,11 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
   ```text
   You are a rigorous, careful AI assistant. Thoroughly fulfill all
   objectives of the user's task while preserving its exact scope.
-  Maintain strict factual discipline: prohibit unsupported claims regarding
-  services, pricing (e.g., 'no hidden costs'), turnaround time (e.g., 'fast turnaround'),
-  technical capabilities, security (e.g., 'secure ordering system'), responsive design
-  (e.g., 'responsive by default'), experience, or guarantees. In any marketing templates
-  or copy, clearly distinguish suggested draft copy from verified facts, and use
-  explicit placeholders or conditional phrasing for any business claim not verified in the task.
+  Enforce strict factual discipline:
+  1. Never invent numerical market statistics, percentages, or metrics unless provided in the task or attributed to a verified source; omit them or mark for verification.
+  2. Never assert that an agency provides specific features, mobile optimization, turnaround time, pricing, security, or capabilities unless established in the task; use conditional phrasing or explicit placeholders.
+  3. Never write outreach copy that falsely claims the sender inspected, reviewed, or tested a prospect's website unless the task confirms an audit took place; use neutral framing or audit placeholders.
+  4. Clearly distinguish suggested copy and hypotheses from verified facts.
   ```
 * **User Prompt:**
   ```text
@@ -299,27 +298,34 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
   2. Structure & Output Formatting: Organize the output with clear, dedicated headings
      for each part of the task so the response is structured, readable, and directly
      comparable to the basic response.
-  3. Specificity & Context: Provide clear, practical, and actionable steps rather
-     than generic generalizations.
-  4. Prohibition of Unsupported Business & Service Claims: Strictly prohibit unverified
-     claims about the business's services, pricing, turnaround time, security,
-     guarantees, experience, and capabilities. Never invent claims such as 'no hidden costs',
-     'fast turnaround', 'every site we build is responsive by default', 'secure ordering system',
-     or guaranteed outcomes unless those details are explicitly provided in the task.
-  5. Marketing Templates, Copy & Conditional Phrasing: In all marketing templates,
-     outreach copy, and sample posts, clearly distinguish suggested copy from verified facts.
-     Whenever a business-specific claim, feature, pricing term, or capability has not
-     been confirmed, use explicit placeholders (e.g., [Insert Verified Pricing / Terms],
-     [Insert Actual Turnaround Time], [Insert Specific Feature / e.g., Online Ordering])
-     or conditional language (e.g., 'If your service includes...', 'Where applicable...').
-  6. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions,
-     hypotheses, or suggestions that require real-world validation. Never present
-     speculative assumptions, artificial statistics, or customer outcomes as established facts.
+  3. Numerical Statistics Guardrail: Do not generate numerical market statistics,
+     percentages, benchmarks, or adoption rates (e.g., '80% of searches', 'under 3 seconds')
+     unless explicitly supplied in the task or backed by a named, verifiable source.
+     Otherwise, omit the numerical figure or label it as [Statistic to be verified from reliable source].
+  4. Business Capabilities & Services Guardrail: Do not assert that an agency provides
+     specific features, mobile-friendly design, fast turnaround, security, online
+     ordering, or pricing terms unless the task explicitly confirms those capabilities.
+     Use conditional language (e.g., 'If your agency offers [Feature]...', 'Depending on your service scope...')
+     or explicit placeholders (e.g., [Insert Agency Core Services], [Insert Pricing Terms]).
+  5. Prospect Research & Audit Guardrail: In outreach templates and sample messages,
+     never claim that the sender inspected, reviewed, or audited the prospect's website
+     (e.g., do NOT write 'I reviewed your website on mobile and noticed...') unless the task
+     confirms that an audit occurred. Provide a neutral opening (e.g., addressing common
+     industry challenges) or an explicit placeholder (e.g., [Insert specific observation
+     if you have audited the recipient's website / or use: 'Many local businesses face...']).
+  6. Marketing Templates vs. Verified Facts: Clearly separate suggested copy from verified
+     facts. In all marketing templates, use clear bracketed placeholders or conditional
+     wording for unverified details, and avoid ungrounded outcome claims or guarantees.
+  7. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions,
+     hypotheses, or recommendations that require real-world validation. Never present
+     speculative assumptions or customer outcomes as established facts.
   ```
 
 #### Rationale for Revision & Observed Differences
 * **Objective & Scope Preservation:** Explicitly preventing the prompt optimizer from narrowing or mutating the task ensures that multi-deliverable prompts (such as market research, lead qualification, and content creation) are answered in full rather than devolving into a single marketing outline or post.
-* **Prohibition of Unsupported Service Claims:** Forbids boilerplate marketing buzzwords (e.g., "fast turnaround", "no hidden costs", "secure ordering system", "responsive by default") that LLMs routinely insert into draft copy without factual basis.
+* **Statistics Guardrail:** Prohibits generating synthetic statistics or industry benchmarks (e.g., "80% of searches happen on mobile", "under 3 seconds") unless verified by a source.
+* **Prohibition of Unsupported Service Claims:** Forbids boilerplate marketing claims (e.g., "fast turnaround", "no hidden costs", "secure ordering system", "responsive by default") that LLMs routinely insert into draft copy without factual basis.
+* **Prospect Audit Disambiguation:** Eliminates false outreach claims claiming the sender inspected or audited a prospect's website when no audit took place, replacing them with neutral industry observations or audit placeholders.
 * **Conditional Phrasing & Strict Placeholders:** Requires marketing drafts to clearly separate suggested copy from verified facts and use explicit bracketed placeholders for any unverified capability or pricing feature.
 * **Direct Comparability:** Both versions address the exact same questions and goals, enabling a true side-by-side comparison of prompt quality, structural discipline, and factual rigor.
 
@@ -327,7 +333,9 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
 | Evaluation Dimension | Version 1 (Basic Prompt) | Version 2 (Improved Prompt) |
 |---|---|---|
 | **Objective Alignment** | Answers request broadly, may lack depth | Preserves exact task scope while delivering structured, complete answers for every component |
+| **Statistical Integrity** | Invents arbitrary percentages and benchmarks | Omits numerical statistics or flags them for source verification |
 | **Claim & Capability Rigor** | Frequently invents generic claims ("no hidden costs", "fast turnaround") | Prohibits unverified service claims; mandates conditional phrasing and placeholders |
+| **Prospect Audit Honesty** | Claims unverified website inspection ("I looked at your site...") | Forbids false audit claims; uses neutral openings or audit placeholders |
 | **Factual Reliability** | High risk of hallucinated stats & fake guarantees | Strictly bounded to input data, with assumptions flagged as hypotheses |
 | **Actionability** | Often vague and broad | Specific, structured, ready to execute with clear steps |
 | **Output Formatting** | Freeform unsegmented text | Organized dedicated sections and clear headings |
