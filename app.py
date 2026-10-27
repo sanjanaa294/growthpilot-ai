@@ -37,6 +37,31 @@ st.sidebar.info(
 )
 
 
+def clean_escaped_pipes(text: str) -> str:
+    """
+    Unescape escaped pipe characters (\\|) outside inline code spans (`...`).
+    Preserves inline code and normal text.
+    """
+    lines = text.splitlines()
+    processed_lines = []
+
+    for line in lines:
+        if r"\|" in line:
+            # Split by inline code spans `...`
+            parts = re.split(r"(`[^`]+`)", line)
+            new_parts = []
+            for part in parts:
+                if part.startswith("`") and part.endswith("`") and len(part) >= 2:
+                    new_parts.append(part)
+                else:
+                    new_parts.append(part.replace(r"\|", "|"))
+            line = "".join(new_parts)
+
+        processed_lines.append(line)
+
+    return "\n".join(processed_lines)
+
+
 def format_ai_markdown(result: str) -> str:
     """Format and clean markdown so tables and sections render properly in Streamlit."""
     if not result:
@@ -54,7 +79,10 @@ def format_ai_markdown(result: str) -> str:
         if len(lines) >= 2 and lines[0].startswith("```") and lines[-1].strip() == "```":
             cleaned = "\n".join(lines[1:-1]).strip()
 
-    # Unwrap any table accidentally enclosed in code fences like ```markdown\n| ... |\n```
+    # 1. Unescape any escaped pipe characters (\|) outside inline code
+    cleaned = clean_escaped_pipes(cleaned)
+
+    # 2. Unwrap any table accidentally enclosed in code fences like ```markdown\n| ... |\n```
     table_fence_pattern = (
         r"```(?:markdown|md)?\s*?\n"
         r"((?:\|[^\n]+\|\s*?\n)+)"
@@ -62,21 +90,21 @@ def format_ai_markdown(result: str) -> str:
     )
     cleaned = re.sub(table_fence_pattern, r"\n\1\n", cleaned)
 
-    # Ensure a blank line before any markdown table header row if preceded by non-newline
+    # 3. Ensure a blank line before any markdown table header row if preceded by non-newline
     cleaned = re.sub(
         r"([^\n])\n(\|[^\n]+\|\s*?\n\|[-: |]+\|)",
         r"\1\n\n\2",
         cleaned,
     )
 
-    # Ensure a blank line after any markdown table if followed immediately by non-table text
+    # 4. Ensure a blank line after any markdown table if followed immediately by non-table text
     cleaned = re.sub(
         r"(\|[^\n]+\|)\n([^\n|])",
         r"\1\n\n\2",
         cleaned,
     )
 
-    # Normalize excessive newlines
+    # 5. Normalize excessive newlines
     cleaned = re.sub(r"\n{3,}", r"\n\n", cleaned)
 
     return cleaned
@@ -231,6 +259,7 @@ elif feature == "Lead Qualification":
                         "- Buying readiness or urgency: 15 points\n\n"
                         "Present the 5 criteria breakdown in a clean Markdown table with columns:\n"
                         "| Criterion | Max Points | Awarded Points | Evidence | Unknown/Unverified |\n"
+                        "Use standard markdown table pipes '|' without escaping them (do NOT use '\\|'). "
                         "Ensure a blank line before and after the table. Do not wrap the table or response in code blocks or backticks.\n\n"
                         "For each criterion, show the maximum points, awarded points, "
                         "evidence from the input, and whether the criterion is unknown. "

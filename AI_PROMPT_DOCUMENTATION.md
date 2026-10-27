@@ -129,7 +129,7 @@ GrowthPilot AI is an AI-powered business growth assistant developed for the Tech
 
   Present the 5 criteria breakdown in a clean Markdown table with columns:
   | Criterion | Max Points | Awarded Points | Evidence | Unknown/Unverified |
-  Ensure a blank line before and after the table. Do not wrap the table or response in code blocks or backticks.
+  Use standard markdown table pipes '|' without escaping them (do NOT use '\|'). Ensure a blank line before and after the table. Do not wrap the table or response in code blocks or backticks.
 
   For each criterion, show the maximum points, awarded points, evidence from the input,
   and whether the criterion is unknown. Do not award full points for unknown information;
@@ -146,7 +146,7 @@ GrowthPilot AI is an AI-powered business growth assistant developed for the Tech
 #### Rationale for Revision & Observed Differences
 * **Transparent Mathematical Rubric:** Distributing 100 points across 5 weighted criteria prevents subjective guesswork.
 * **Conservative Unknown Scoring:** When budget or timeline is omitted, the model awards 0–5 points rather than guessing full points.
-* **Markdown Table Formatting Directives:** Explicitly instructing column headers and prohibiting enclosing code blocks (` ``` `) resolved the UI bug where raw table syntax was previously displayed.
+* **Markdown Table Formatting & Escaped Pipe Handling:** Explicitly requiring standard unescaped pipes (`|` instead of `\|`) and ensuring double newlines around tables resolved the UI defect where raw backslashes and table syntax were previously rendered.
 * **Actionable Discovery:** Adding item 5 ("One useful discovery question") equips sales teams with immediate follow-up utility.
 
 ---
