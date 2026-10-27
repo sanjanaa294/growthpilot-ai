@@ -458,9 +458,9 @@ elif feature == "Prompt Testing Lab":
                 "1. Objective & Scope Preservation: Fulfill all components and intended deliverables of the original task without altering, narrowing, or replacing the objective. If the task asks for multiple deliverables (such as market research, lead qualification, and marketing content), address each one in full.\n"
                 "2. Structure & Output Formatting: Organize the output with clear, dedicated headings for each part of the task so the response is structured, readable, and directly comparable to the basic response.\n"
                 "3. Specificity & Context: Provide clear, practical, and actionable steps rather than generic generalizations.\n"
-                "4. Factual Grounding & Constraints: Rely strictly on information provided in the task and sound general reasoning. Never invent company metrics, audience demographics, customer results, statistics, guarantees, or testimonials.\n"
-                "5. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions, hypotheses, or suggestions that require real-world validation.\n"
-                "6. Placeholders: Use bracketed placeholders (such as [Business Name] or [Target Audience]) only for essential details not supplied in the task."
+                "4. Prohibition of Unsupported Business & Service Claims: Strictly prohibit unverified claims about the business's services, pricing, turnaround time, security, guarantees, experience, and capabilities. Never invent claims such as 'no hidden costs', 'fast turnaround', 'every site we build is responsive by default', 'secure ordering system', or guaranteed outcomes unless those details are explicitly provided in the task.\n"
+                "5. Marketing Templates, Copy & Conditional Phrasing: In all marketing templates, outreach copy, and sample posts, clearly distinguish suggested copy from verified facts. Whenever a business-specific claim, feature, pricing term, or capability has not been confirmed, use explicit placeholders (e.g., [Insert Verified Pricing / Terms], [Insert Actual Turnaround Time], [Insert Specific Feature / e.g., Online Ordering]) or conditional language (e.g., 'If your service includes...', 'Where applicable...').\n"
+                "6. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions, hypotheses, or suggestions that require real-world validation. Never present speculative assumptions, artificial statistics, or customer outcomes as established facts."
             )
 
             col1, col2 = st.columns(2)
@@ -482,8 +482,12 @@ elif feature == "Prompt Testing Lab":
                         system_prompt=(
                             "You are a rigorous, careful AI assistant. Thoroughly fulfill all "
                             "objectives of the user's task while preserving its exact scope. "
-                            "Provide clear structure, actionable detail, and strong factual discipline "
-                            "without inventing unprovided data or making unsupported claims."
+                            "Maintain strict factual discipline: prohibit unsupported claims regarding "
+                            "services, pricing (e.g., 'no hidden costs'), turnaround time (e.g., 'fast turnaround'), "
+                            "technical capabilities, security (e.g., 'secure ordering system'), responsive design "
+                            "(e.g., 'responsive by default'), experience, or guarantees. In any marketing templates "
+                            "or copy, clearly distinguish suggested draft copy from verified facts, and use "
+                            "explicit placeholders or conditional phrasing for any business claim not verified in the task."
                         ),
                         user_prompt=improved_prompt,
                     )
@@ -493,10 +497,10 @@ elif feature == "Prompt Testing Lab":
             st.divider()
             st.subheader("What changed in the prompt?")
             st.markdown(
-                "- **Scope preservation:** explicitly instructs the AI to fulfill all requested task deliverables without narrowing or altering the objective.\n"
+                "- **Scope preservation:** instructs the AI to fulfill all requested task deliverables without narrowing the objective.\n"
                 "- **Structure & formatting:** organizes output into dedicated, readable sections for each part of the task.\n"
-                "- **Factual constraints:** strictly prohibits invented metrics, testimonials, or guarantees, and flags hypotheses for validation.\n"
-                "- **Actionability & placeholders:** replaces vague generalities with specific steps and uses clear bracketed placeholders for missing details."
+                "- **Service & marketing claim restrictions:** prohibits unverified claims about pricing, turnaround, security, or capabilities in draft copy.\n"
+                "- **Conditional phrasing & placeholders:** mandates explicit placeholders and conditional language for unverified features, distinguishing suggested copy from verified facts."
             )
             st.caption(
                 "Compare both outputs for factual reliability, relevance, clarity, "

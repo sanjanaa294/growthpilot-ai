@@ -280,8 +280,12 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
   ```text
   You are a rigorous, careful AI assistant. Thoroughly fulfill all
   objectives of the user's task while preserving its exact scope.
-  Provide clear structure, actionable detail, and strong factual discipline
-  without inventing unprovided data or making unsupported claims.
+  Maintain strict factual discipline: prohibit unsupported claims regarding
+  services, pricing (e.g., 'no hidden costs'), turnaround time (e.g., 'fast turnaround'),
+  technical capabilities, security (e.g., 'secure ordering system'), responsive design
+  (e.g., 'responsive by default'), experience, or guarantees. In any marketing templates
+  or copy, clearly distinguish suggested draft copy from verified facts, and use
+  explicit placeholders or conditional phrasing for any business claim not verified in the task.
   ```
 * **User Prompt:**
   ```text
@@ -297,25 +301,33 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
      comparable to the basic response.
   3. Specificity & Context: Provide clear, practical, and actionable steps rather
      than generic generalizations.
-  4. Factual Grounding & Constraints: Rely strictly on information provided in the
-     task and sound general reasoning. Never invent company metrics, audience
-     demographics, customer results, statistics, guarantees, or testimonials.
-  5. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions,
-     hypotheses, or suggestions that require real-world validation.
-  6. Placeholders: Use bracketed placeholders (such as [Business Name] or [Target Audience])
-     only for essential details not supplied in the task.
+  4. Prohibition of Unsupported Business & Service Claims: Strictly prohibit unverified
+     claims about the business's services, pricing, turnaround time, security,
+     guarantees, experience, and capabilities. Never invent claims such as 'no hidden costs',
+     'fast turnaround', 'every site we build is responsive by default', 'secure ordering system',
+     or guaranteed outcomes unless those details are explicitly provided in the task.
+  5. Marketing Templates, Copy & Conditional Phrasing: In all marketing templates,
+     outreach copy, and sample posts, clearly distinguish suggested copy from verified facts.
+     Whenever a business-specific claim, feature, pricing term, or capability has not
+     been confirmed, use explicit placeholders (e.g., [Insert Verified Pricing / Terms],
+     [Insert Actual Turnaround Time], [Insert Specific Feature / e.g., Online Ordering])
+     or conditional language (e.g., 'If your service includes...', 'Where applicable...').
+  6. Hypotheses vs. Stated Facts: Clearly distinguish stated facts from assumptions,
+     hypotheses, or suggestions that require real-world validation. Never present
+     speculative assumptions, artificial statistics, or customer outcomes as established facts.
   ```
 
 #### Rationale for Revision & Observed Differences
 * **Objective & Scope Preservation:** Explicitly preventing the prompt optimizer from narrowing or mutating the task ensures that multi-deliverable prompts (such as market research, lead qualification, and content creation) are answered in full rather than devolving into a single marketing outline or post.
+* **Prohibition of Unsupported Service Claims:** Forbids boilerplate marketing buzzwords (e.g., "fast turnaround", "no hidden costs", "secure ordering system", "responsive by default") that LLMs routinely insert into draft copy without factual basis.
+* **Conditional Phrasing & Strict Placeholders:** Requires marketing drafts to clearly separate suggested copy from verified facts and use explicit bracketed placeholders for any unverified capability or pricing feature.
 * **Direct Comparability:** Both versions address the exact same questions and goals, enabling a true side-by-side comparison of prompt quality, structural discipline, and factual rigor.
-* **Factual Integrity & Demographics:** Strictly restrains the model from inventing unprovided company facts, customer demographics, or performance guarantees.
-* **Hypothesis Disclaimers:** Requires the model to separate confirmed facts from hypotheses needing validation before spending business resources.
 
 #### Side-by-Side Comparison Criteria
 | Evaluation Dimension | Version 1 (Basic Prompt) | Version 2 (Improved Prompt) |
 |---|---|---|
 | **Objective Alignment** | Answers request broadly, may lack depth | Preserves exact task scope while delivering structured, complete answers for every component |
+| **Claim & Capability Rigor** | Frequently invents generic claims ("no hidden costs", "fast turnaround") | Prohibits unverified service claims; mandates conditional phrasing and placeholders |
 | **Factual Reliability** | High risk of hallucinated stats & fake guarantees | Strictly bounded to input data, with assumptions flagged as hypotheses |
 | **Actionability** | Often vague and broad | Specific, structured, ready to execute with clear steps |
 | **Output Formatting** | Freeform unsegmented text | Organized dedicated sections and clear headings |
