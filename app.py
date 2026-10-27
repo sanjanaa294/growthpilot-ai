@@ -128,7 +128,7 @@ def run_ai(system_prompt: str, user_prompt: str) -> str | None:
     except Exception as error:
         st.error(
             "The AI request failed. Check your internet connection, "
-            "OpenRouter API key, model availability, and account limits."
+            "Gemini API key, model availability, and account limits."
         )
         # The details are useful while developing; they do not reveal the API key.
         st.caption(f"Technical details: {error}")

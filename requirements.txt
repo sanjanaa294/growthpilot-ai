@@ -1,5 +1,5 @@
 streamlit
-openrouter
+google-genai
 python-dotenv
 pandas
 plotly

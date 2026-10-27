@@ -345,9 +345,9 @@ The Prompt Testing Lab allows users to see prompt engineering principles in acti
 
 ## 3. Development, Connection & Debugging Prompts
 
-During setup and verification, connection tests and diagnostic scripts were used to validate the OpenRouter API:
+During setup and verification, connection tests and diagnostic scripts were used to validate the model API connection:
 
-### OpenRouter Health Check Prompt (`test_openrouter.py`)
+### Google Gemini API Health Check Prompt (`test_gemini.py`)
 * **System Prompt:**
   ```text
   You are a helpful AI business assistant. Give clear and concise answers.
@@ -356,9 +356,9 @@ During setup and verification, connection tests and diagnostic scripts were used
   ```text
   In two sentences, explain how AI can help a small business identify potential customers.
   ```
-* **Outcome:** Confirmed API authentication, model response handling, and latency.
+* **Outcome:** Validates Google GenAI SDK authentication, model response latency, and exception handling without token waste.
 
-### Rate Limiting & Model Fallback Handling
-* When upstream providers encounter temporary rate limits (such as HTTP 429), the LLM client properly captures error details:
-  * Application displays a user-friendly error in the Streamlit UI.
-  * Technical error strings are surfaced cleanly in captions without leaking secret API tokens.
+### Model Availability & Fallback Architecture
+* The application loads `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) and `GEMINI_MODEL` (defaulting to `gemini-2.5-flash`) dynamically from `.env`.
+* If a transient model error occurs, the client automatically attempts a graceful fallback to `gemini-1.5-flash`.
+* User-friendly error messages surface in the Streamlit UI with technical captions while protecting secret API keys from display.

@@ -41,7 +41,7 @@ The application provides five focused business growth tools accessible via an in
 
 * **Language:** Python 3.10+
 * **Web Framework:** [Streamlit](https://streamlit.io/)
-* **AI Provider / LLM SDK:** [OpenRouter SDK](https://openrouter.ai/)
+* **AI Provider / LLM SDK:** [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`)
 * **Environment Configuration:** `python-dotenv`
 * **Data & Presentation:** Markdown (GFM tables), Pandas
 
@@ -52,8 +52,8 @@ The application provides five focused business growth tools accessible via an in
 ```text
 growthpilot-ai/
 ├── app.py                      # Main Streamlit web application
-├── llm.py                      # OpenRouter LLM interface & API caller
-├── test_openrouter.py          # Quick connection test for OpenRouter API
+├── llm.py                      # Google Gemini API interface & helper
+├── test_gemini.py              # Quick connection test for Google Gemini API
 ├── requirements.txt            # Python dependencies
 ├── .env                        # Local environment variables (API key & model; gitignored)
 ├── .gitignore                  # Git exclusions for secrets, venv, and cache
@@ -70,7 +70,7 @@ Follow these steps to run GrowthPilot AI locally:
 
 ### 1. Prerequisites
 * Python 3.10, 3.11, or 3.12 installed on your machine.
-* An [OpenRouter API Key](https://openrouter.ai/keys).
+* A [Google Gemini API Key](https://aistudio.google.com/apikey).
 
 ### 2. Clone or Extract the Project
 Open a terminal in the project directory:
@@ -98,20 +98,20 @@ pip install -r requirements.txt
 ### 5. Configure Environment Variables
 Create or verify a `.env` file in the root directory:
 ```env
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-OPENROUTER_MODEL=nvidia/nemotron-3.5-lightning:free
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
 ```
-> **Note on Models:** You can select any model available on OpenRouter (e.g., `nvidia/nemotron-3.5-lightning:free`, `meta-llama/llama-3.3-70b-instruct`, `anthropic/claude-3.5-sonnet`, etc.). If a free model experiences upstream rate limiting (HTTP 429), switch to another active free model or your preferred provider key.
+> **Note on Models:** The default model is `gemini-2.5-flash` with automatic fallback to `gemini-1.5-flash` if needed.
 
 ### 6. Test the API Connection
-Run the included test script to verify your OpenRouter API key and model:
+Run the included test script to verify your Google Gemini API key and model:
 ```bash
-python test_openrouter.py
+python test_gemini.py
 ```
 You should see:
 ```text
-Testing GrowthPilot AI connection to OpenRouter...
-SUCCESS! OpenRouter returned a response.
+Testing GrowthPilot AI connection to Google Gemini API...
+SUCCESS! Google Gemini API returned a response.
 ```
 
 ### 7. Run the Web Application

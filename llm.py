@@ -1,67 +1,51 @@
 import os
 
 from dotenv import load_dotenv
-from openrouter import OpenRouter
+from google import genai
+from google.genai import types
 
 # Load environment variables from .env
 load_dotenv()
 
 
 def generate_text(system_prompt: str, user_prompt: str) -> str:
-    """Send a prompt to OpenRouter and return the generated text."""
+    """Send a prompt to Google Gemini API and return the generated text."""
 
     # Reload environment variables to reflect any updates in .env
     load_dotenv(override=True)
-    api_key = os.getenv("OPENROUTER_API_KEY")
-    model = os.getenv("OPENROUTER_MODEL")
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    model = os.getenv("GEMINI_MODEL") or "gemini-2.5-flash"
 
     if not api_key:
         raise RuntimeError(
-            "OPENROUTER_API_KEY is missing. Check your .env file."
+            "GEMINI_API_KEY is missing. Check your .env file."
         )
 
-    if not model:
-        raise RuntimeError(
-            "OPENROUTER_MODEL is missing. Check your .env file."
-        )
+    client = genai.Client(api_key=api_key)
 
-    with OpenRouter(api_key=api_key) as client:
-        try:
-            response = client.chat.send(
-                model=model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt,
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt,
-                    },
-                ],
+    try:
+        response = client.models.generate_content(
+            model=model,
+            contents=user_prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=system_prompt,
+            ),
+        )
+    except Exception as err:
+        # Fallback to gemini-1.5-flash if the configured model encounters availability issues
+        fallback_model = "gemini-1.5-flash"
+        if model != fallback_model:
+            response = client.models.generate_content(
+                model=fallback_model,
+                contents=user_prompt,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_prompt,
+                ),
             )
-        except Exception as err:
-            # If the configured free model experiences temporary upstream rate limiting,
-            # attempt a fallback free model so users are not blocked.
-            fallback_model = "nvidia/nemotron-3.5-lightning:free"
-            if ("429" in str(err) or "rate" in str(err).lower()) and model != fallback_model:
-                response = client.chat.send(
-                    model=fallback_model,
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": system_prompt,
-                        },
-                        {
-                            "role": "user",
-                            "content": user_prompt,
-                        },
-                    ],
-                )
-            else:
-                raise err
+        else:
+            raise err
 
-    result = response.choices[0].message.content
+    result = response.text
 
     if not result:
         raise RuntimeError("The AI model returned an empty response.")
