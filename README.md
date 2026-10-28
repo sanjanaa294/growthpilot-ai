@@ -16,12 +16,12 @@ The application provides five focused business growth tools accessible via an in
 
 2. **🎯 Lead Qualification**
    * Evaluates prospect alignment against an Ideal Customer Profile (ICP) using a transparent 100-point scoring rubric:
-     - Business/customer type match (30 pts)
-     - Stated need vs. solution match (30 pts)
-     - Budget fit (15 pts)
-     - Location or service-area fit (10 pts)
-     - Buying readiness or urgency (15 pts)
-   * Renders the evaluation in a structured Markdown scoring table with awarded points and evidence. Unknown criteria are scored conservatively rather than assumed, accompanied by high-leverage sales discovery questions.
+     - Need Alignment (30 pts)
+     - Business Fit (30 pts)
+     - Budget Viability (15 pts)
+     - Decision-Maker Access (10 pts)
+     - Urgency and Timeline (15 pts)
+   * Renders the evaluation in a structured Markdown scoring table with confirmed points, evidence, and status. Unknown budget, decision-maker access, or timeline are marked as "Pending discovery" rather than assumed or penalized, accompanied by Confirmed Subtotal (/60), Pending Points (/40), and Potential Score Range.
 
 3. **✉️ Personalized Outreach Email Generator**
    * Produces concise, professional, ready-to-edit B2B outreach emails.

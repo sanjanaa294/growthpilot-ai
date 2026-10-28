@@ -29,7 +29,7 @@
 * **Spoken Dialogue:**  
   > "Hello everyone. Today I'm excited to present **GrowthPilot AI**, an AI-powered business growth and automation assistant designed specifically for small businesses, freelancers, and growth consultants in the technology domain.  
   >  
-  > For this project, I chose **Python** and **Streamlit** for rapid, interactive web application deployment, paired with **OpenRouter** as the unified LLM API. OpenRouter was selected because it provides flexible access to state-of-the-art open-source and proprietary models without vendor lock-in, allowing seamless testing and cost optimization."
+  > For this project, I chose **Python** and **Streamlit** for rapid, interactive web application deployment, paired with the **Google Gemini API** via the official `google-genai` SDK. Gemini was selected for its high reasoning capabilities, fast response times, and reliable performance across analytical and creative tasks."
 
 ---
 
@@ -82,7 +82,7 @@
   * *Lead:* "A local bakery with an outdated website wanting online orders, budget unverified."
   * Click **Qualify Lead**.
 * **Spoken Dialogue:**  
-  > "Next, **Lead Qualification**. Look at the scoring table: it renders as a clean, structured table with Max Points, Awarded Points, and evidence. Because budget is unverified, it awards zero points for that criterion rather than guessing, resulting in a conservative 65 out of 100 with actionable discovery questions."
+  > "Next, **Lead Qualification**. Look at the scoring table: it renders as a clean, structured table with Max Points, Confirmed Points, Evidence, and Status. Because budget, decision-maker access, and timeline are unverified, they are marked as 'Pending discovery' rather than penalizing the lead, clearly displaying a confirmed subtotal out of 60, pending points out of 40, and a potential score range with actionable discovery questions."
 
 #### 3. Email Generator & Marketing Content (2:35 – 2:55)
 * **Visual:** Briefly demonstrate **Email Generator** and **Marketing Content**.
@@ -111,7 +111,7 @@
 
 ## Recording Checklist for the Candidate
 - [ ] Ensure local virtual environment is active: `.venv\Scripts\activate`
-- [ ] Confirm `.env` has valid `OPENROUTER_API_KEY` and accessible `OPENROUTER_MODEL`
+- [ ] Confirm `.env` has valid `GEMINI_API_KEY` and accessible `GEMINI_MODEL`
 - [ ] Run the app: `streamlit run app.py`
 - [ ] Test screen recorder (OBS, Loom, or Windows Game Bar `Win + G`) with microphone audio
 - [ ] Verify video duration is at least 2 minutes (target: 3–4 minutes)

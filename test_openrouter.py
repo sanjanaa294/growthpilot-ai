@@ -2,7 +2,7 @@ from llm import generate_text
 
 
 def main():
-    print("Testing GrowthPilot AI connection to OpenRouter...\n")
+    print("Testing GrowthPilot AI connection to Google Gemini API...\n")
 
     try:
         answer = generate_text(
@@ -16,7 +16,7 @@ def main():
             ),
         )
 
-        print("SUCCESS! OpenRouter returned a response.\n")
+        print("SUCCESS! Google Gemini API returned a response.\n")
         print("AI Response:")
         print(answer)
 
